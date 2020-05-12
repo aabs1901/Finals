@@ -30,12 +30,12 @@ export default {
     WorkOutRecord,
     WorkOutSummary
   },
-  methods: {
+    methods: {
     NewWorkOutAdded(WorkOut) {
       this.WorkOuts.push(WorkOut)
    /* this is were the name of the workout and the amount of times they did it */
-    let labels = []
-    let data = []
+    let labels = this.WorkOuts.map( w => w.type )  // but you need to put data from this.Workouts in this array
+    let data = this.WorkOuts.map(w => w.reps)    // and the numbers go in in this array
   
   this.WorkOutsChartData = {
     labels: labels,
@@ -45,6 +45,9 @@ export default {
     }]
      
   }
+
+  
+
       },
       loadWorkOutData(){
         this.WorkOuts = work 
