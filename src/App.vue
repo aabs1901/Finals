@@ -1,28 +1,64 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <NewWorkOut v-on:WorkOut-added="NewWorkOutAdded"></NewWorkOut>
+    <WorkOutRecord v-bind:WorkOuts="WorkOuts"></WorkOutRecord>
+    <WorkOutSummary v-if="dataLoaded" v-bind:chartData="WorkOutsChartData" v-bind:options="options"></WorkOutSummary>
+  
+
   </div>
+ 
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import NewWorkOut from './components/NewWorkOut.vue'
+import WorkOutRecord from './components/WorkOutRecord.vue'
+import WorkOutSummary from './components/WorkOutSummary.vue'
 
 export default {
-  name: 'App',
+  name: 'app',
+  data() {
+    return{
+      WorkOuts: [],
+      WorkOutsChartData: {},
+      dataLoaded:true
+    }
+
+  },
   components: {
-    HelloWorld
+    NewWorkOut,
+    WorkOutRecord,
+    WorkOutSummary
+  },
+  methods: {
+    NewWorkOutAdded(WorkOut) {
+      this.WorkOuts.push(WorkOut)
+   /* this is were the name of the workout and the amount of times they did it */
+    let labels = []
+    let data = []
+  
+  this.WorkOutsChartData = {
+    labels: labels,
+    datasets: [{
+      label: "Workout",
+      data: data
+    }]
+     
+  }
+      },
+      loadWorkOutData(){
+        this.WorkOuts = work 
+        let lables = this.WorkOuts.map(work => work.when)
+      }
+    
+    
   }
 }
+
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
+ 
+
 </style>
